@@ -41,12 +41,12 @@ prepareText.innerText = preparation.value
 document.getElementById('recipe-container').style.display='inline'
 document.getElementById('append-preparation').appendChild(prepareText)
 
-//localStorage.setItem('recipe-title', recipeTitle.value)
-//localStorage.setItem('recipe-ingredients', ingredText.value)
-//localStorage.setItem('recipe-preparation', preparation.value)
-Cookies.set('recipe-title' , recipeTitle.value , {expires: 200})
-Cookies.set('recipe-ingredients' , ingredText.value, {expires: 200})
-Cookies.set('recipe-preparation' , preparation.value, {expires: 200})
+localStorage.setItem('recipe-title', recipeTitle.value)
+localStorage.setItem('recipe-ingredients', ingredText.value)
+localStorage.setItem('recipe-preparation', preparation.value)
+//Cookies.set('recipe-title' , recipeTitle.value , {expires: 200})
+//Cookies.set('recipe-ingredients' , ingredText.value, {expires: 200})
+//Cookies.set('recipe-preparation' , preparation.value, {expires: 200})
 }
 //getign the stored data 
 function ret(){
@@ -57,13 +57,13 @@ function ret(){
 	
 	txtContainer.style.display = 'inline'
 	document.getElementById('recipe-container').style.display='none'
-	recipeTitle.value = Cookies.get('recipe-title')
-    ingredText.value = Cookies.get('recipe-ingredients')
-    preparation.value = Cookies.get('recipe-preparation')
+	//recipeTitle.value = Cookies.get('recipe-title')
+    //ingredText.value = Cookies.get('recipe-ingredients')
+   // preparation.value = Cookies.get('recipe-preparation')
 	
-    //recipeTitle.value = localStorage.getItem('recipe-title')
-	//ingredText.value = localStorage.getItem('recipe-ingredients')
-	//preparation.value = localStorage.getItem('recipe-preparation')
+    recipeTitle.value = localStorage.getItem('recipe-title')
+	ingredText.value = localStorage.getItem('recipe-ingredients')
+	preparation.value = localStorage.getItem('recipe-preparation')
 	
 }
 //let recipeTitle = document.getElementById('title-text')
