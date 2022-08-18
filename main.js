@@ -88,7 +88,7 @@ viewBtn.addEventListener('click', () => {
 	
 	for(let i = 0; i < 1; i++)
 {
-	if ('title-backup' in localStorage)
+	if (localStorage.getItem('title-backup'.length > 1))
 	{
 		counter++
 		localStorage.setItem('title-backup-' + counter, localStorage.getItem('title-backup'))
