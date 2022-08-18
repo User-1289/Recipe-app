@@ -6,16 +6,20 @@
 <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<button id="add-recippe"onclick="newRecipe()">Add a recipe</button>
 <div id="container">
 </div>
 <div id="recipe-container">
-<u><div id="append-title"></div></u>
+<u><div class="main"id="append-title"></div></u>
 
-<div id="append-ingred" style="text-align:center; font-size:35px;">Ingredients</div>
-<div id="append-preparation" style="text-align:center; font-size:35px;">How to make</div>
+<div class="main" id="append-ingred" style="text-align:center; font-size:35px;">Ingredients</div>
+<div  class="main" id="append-preparation" style="text-align:center; font-size:35px;">How to make</div>
 </div>
-<button id="edit-btn" onclick="ret()">See or edit the recipe</button>
+<table align="left">
+<tr> <td align="left"><button class="btn"id="add-recippe"onclick="newRecipe()">Add a recipe</button> </td> </tr><br>
+<tr><td align="left"><button class="btn" id="edit-btn" onclick="ret()">See or edit the recipe</button> </td> </tr><br>
+<tr><td align="left"><button class="btn"id="view-btn"> View your recipe</button></td></tr>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script defer src="main.js">
 </script>
 </body>
