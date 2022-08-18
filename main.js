@@ -41,10 +41,12 @@ prepareText.innerText = preparation.value
 document.getElementById('recipe-container').style.display='inline'
 document.getElementById('append-preparation').appendChild(prepareText)
 
-localStorage.setItem('recipe-title', recipeTitle.value)
+/*localStorage.setItem('recipe-title', recipeTitle.value)
 localStorage.setItem('recipe-ingredients', ingredText.value)
-localStorage.setItem('recipe-preparation', preparation.value)
-
+localStorage.setItem('recipe-preparation', preparation.value)*/
+Cookies.set('recipe-title', recipeTitle.value)
+Cookies.set('recipe-ingredients', ingredText.value)
+Cookies.set('recipe-preparation', preparation.value)
 }
 //getign the stored data 
 function ret(){
@@ -56,9 +58,47 @@ function ret(){
 	txtContainer.style.display = 'inline'
 	document.getElementById('recipe-container').style.display='none'
 	
-    recipeTitle.value = localStorage.getItem('recipe-title')
+   /* recipeTitle.value = localStorage.getItem('recipe-title')
 	ingredText.value = localStorage.getItem('recipe-ingredients')
-	preparation.value = localStorage.getItem('recipe-preparation')
-	
+	preparation.value = localStorage.getItem('recipe-preparation')*/
+	recipeTitle.value = Cookies.get('recipe-title')
+	ingredText.value = Cookies.get('recipe-ingredients')
+	preparation.value = Cookies.get('recipe-preparation')
 }
-//let recipeTitle = document.getElementById('title-text')
+
+let viewBtn = document.getElementById('view-btn')
+viewBtn.addEventListener('click', () => {
+	
+	const viewTitle = Cookies.get('recipe-title')
+	const viewIngred = Cookies.get('recipe-ingredients')
+	const viewPrepare = Cookies.get('recipe-preparation')
+	
+	
+	//Cookies.set('')
+	
+	Cookies.remove('recipe-title')
+	Cookies.remove('recipe-ingredients')
+	Cookies.remove('recipe-preparation')
+	
+	localStorage.setItem('title-backup' , viewTitle)
+	localStorage.setItem('ingredients-backup' , viewIngred)
+	localStorage.setItem('prepare-backup' , viewPrepare)
+	
+	let counter = '0'
+	
+	for(let i = 0; i < 1; i++)
+{
+	if ('title-backup' in localStorage)
+	{
+		counter++
+		localStorage.setItem('title-backup-' + counter, viewTitle )
+	}
+}
+	
+		document.getElementById('container').style.display='none'
+	let main = document.querySelectorAll('.main')
+	for (let box of main)
+	{
+		box.style.display='inline'
+	}
+})
