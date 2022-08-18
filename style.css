@@ -1,5 +1,8 @@
+
 *{
 	font-family:sans-serif;
+	background:black;
+	color:white;
 }
 #title-text{
 	position:fixed;
@@ -74,7 +77,25 @@
 	width:150px;
 	height:40px;
 }
-#add-recippe{
+
+.btn{
 	width:100px;
 	height:40px;
+	border:none;
+}
+.btn:hover{
+	background:white;
+	color:black;
+}
+table{
+	position:fixed;
+	top:10px;
+}
+#view-btn{
+	width:120px;
+	height:40px;
+}
+.main{
+	background:white;
+	color:black;
 }
