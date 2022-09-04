@@ -85,13 +85,15 @@ viewBtn.addEventListener('click', () => {
 	localStorage.setItem('prepare-backup' , viewPrepare)
 	
 	let counter = '0'
+	for(let i = 0; i <=2; i++)
+	{
 	if (localStorage.getItem('title-backup'.length > 1))
 	{
 		counter++
 		localStorage.setItem('title-backup-' + counter, localStorage.getItem('title-backup'))
 		localStorage.removeItem('title-backup')
 	}
-	
+	}
 		document.getElementById('container').style.display='none'
 	let main = document.querySelectorAll('.main')
 	for (let box of main)
