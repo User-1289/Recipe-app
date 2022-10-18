@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recipe app</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<table align="left">
+<tr> <td align="left"><button class="btn"id="add-recippe"onclick="newRecipe()">Add a recipe</button> </td> </tr><br>
+<tr><td align="left"><button class="btn" id="edit-btn" onclick="ret()">See or edit the recipe</button> </td> </tr><br>
+<tr><td align="left"><button class="btn"id="view-btn"> View your recipe</button></td></tr>
+</table><br><br>
+
+<div id="container">
+<table align="center">
+<tr><td align="center"><u><h1 id="title">Name of the food</h1></u></td></tr>
+<tr><td align="center"><textarea id="title-id"></textarea></td></tr>
+<tr><td align="center"><u><div id="ingred">Ingredients</div></u></td></tr>
+<tr><td align="center"><textarea id="ingred-id"></textarea> </td></tr>
+<tr><td align="center"><u><div id="prepare-id">Preparation</div></u></td></tr>
+<tr><td align="center"><textarea id="how-to-make"></textarea> </td></td>
+<tr><td align="center"><button onclick="makeRecipe()"id="submitt">Make the recipe</button></td></tr>
+</table>
+</div>
+
+<div id="recipe-container">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script defer src="script.js">
+</script>
+</body>
+</html>
