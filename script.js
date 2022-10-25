@@ -82,7 +82,7 @@ database.collection("Recipe")
 					 .doc(localStorage.getItem("firebaseDoc"))
 					 .update
 					 ({
-						 UniqueId: arr[0] + 1
+						 UniqueId: arr[arr.length - 1] + 1
 					 })
 				}
 				
