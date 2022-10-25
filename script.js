@@ -1,3 +1,5 @@
+
+//in this project we are using firebase as database with js
 let firebaseConfig = {
   apiKey: "AIzaSyB2dc7G54nZg1H-tKUbxRtWmADEQxRJv10",
   authDomain: "simple-login-page-736b4.firebaseapp.com",
@@ -11,9 +13,13 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 let database = firebase.firestore()
 
-let docId;
-
+let arr = []
+let counter = 99
+let existing;
+let data;
 function makeRecipe() {
+	counter++;
+	localStorage.setItem("counter" , counter)
 	document.getElementById('container').style.display='none'
 	let vTitle = document.getElementById('title-id')
 	let vIngred = document.getElementById('ingred-id')
@@ -21,14 +27,15 @@ function makeRecipe() {
 	
 database.collection("Recipe")
 .add({
+	//UniqueId:localStorage.getItem("counter"),
 	RecipeTitle:vTitle.value,
 	RecipeIngredients:vIngred.value,
 	RecipePreparation:vPrepare.value,
 })
 .then(function(docRef) 
 		{
-			//alert(docRef.id)
-			docId = localStorage.setItem("Recipe-1" , docRef.id)	
+			docId = docRef.id
+			localStorage.setItem("firebaseDoc" , docId)
 		})
 		
 let titleAppend = document.createElement("h2")
@@ -38,41 +45,48 @@ titleAppend.innerText = vTitle.value
 ingredAppend.innerText = vIngred.value
 prepareAppend.innerText = vPrepare.value
 
-document.getElementById('recipe-container').style.display='inline'	
+//document.getElementById('recipe-container').style.display='inline'	
 document.getElementById('recipe-container').appendChild(titleAppend)
 document.getElementById('recipe-container').appendChild(ingredAppend)
 document.getElementById('recipe-container').appendChild(prepareAppend)
 }
-//getign the stored data 
-function ret(){
-	
-}
+
+//getting the stored data
 let viewBtn = document.getElementById('view-btn')
 viewBtn.addEventListener('click', () => {
 document.getElementById('container').style.display='none'
-document.getElementById('recipe-container').style.display='inline'
 
-let titleAppend = document.createElement("h2")
-let ingredAppend = document.createElement("h4")
-let prepareAppend = document.createElement("div")
-
-	database.collection("Recipe")
-	.doc(localStorage.getItem("Recipe-1"))
-	.get()
-	.then((doc) => 
+database.collection("Recipe")
+.get()
+	.then((querySnapshot) => 
 	{
-		if(doc.exists)
+		querySnapshot.forEach((doc) =>
 		{
-			titleAppend.innerText = doc.data().RecipeTitle
-			ingredAppend.innerText = doc.data().RecipeIngredients
-			prepareAppend.innerText = doc.data().RecipePreparation
-			//console.log(doc.data())
-		}
+				 if(doc.get('UniqueId') == null)
+				 {
+					 database.collection("Recipe")
+					 .doc(localStorage.getItem("firebaseDoc"))
+					// .doc("gIrVpQWsTPsmqJuF8zDO")
+					 .update
+					 ({
+						 UniqueId: 100
+					 })
+				//	 arr.push(doc.data().UniqueId)
+		 // console.log(doc.id, '=>', doc.data().RecipeTitle);
+				}
+				else if(doc.get('UniqueId') != null)
+				{
+					arr.push(doc.data().UniqueId)
+					arr.sort()
+					 database.collection("Recipe")
+					 .doc(localStorage.getItem("firebaseDoc"))
+					 .update
+					 ({
+						 UniqueId: arr[0] + 1
+					 })
+				}
+				
+		})
 	})
-	document.getElementById('recipe-container').append(titleAppend)
-	document.getElementById('recipe-container').append(ingredAppend)
-	document.getElementById('recipe-container').append(prepareAppend)
-//titleAppend.innerText = vTitle.value
-//ingredAppend.innerText = vIngred.value
-//prepareAppend.innerText = vPrepare.value
+	console.log(arr)
 })
