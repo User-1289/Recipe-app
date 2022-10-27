@@ -1,6 +1,8 @@
 body{
 	font-family:sans-serif;
-	-webkit-overflow-scrolling : touch;
+	/*-webkit-overflow-scrolling : touch;*/
+	  overflow-x: hidden;
+          overflow-y: auto;
 }
 #title-id{
     display: block;
