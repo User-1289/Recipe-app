@@ -48,7 +48,9 @@ body{
 	text-align:left;
 	font-size:30px;
 }
-#big-container{}
+#big-container{
+text-align:center;
+}
 #container{
 	text-align:center;
 }
