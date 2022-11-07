@@ -1,3 +1,4 @@
+//document.getElementById('container').style.visibility='hidden'
 let arr = []
 let dbDoc;
 let localDoc;
@@ -16,7 +17,20 @@ let database = firebase.firestore()
 
 const docRef = database.collection("Recipe")
 
-docRef.orderBy("RecipeTitle").limit(3)
+	docRef
+	.get()
+		.then((querySnapshot) => 
+		{
+			querySnapshot.forEach((doc) =>
+			{
+				dbDoc = doc.data().UniqueId
+
+				arr.push(doc.data().UniqueId)
+				arr.sort(function(a, b){return a-b})
+						//console.log(arr)
+			})
+		})		
+//docRef.orderBy("RecipeTitle").limit(3)
 function newRecipe()
 {
 	document.getElementById('container').style.visibility='visible'
@@ -37,26 +51,13 @@ function makeRecipe()
 			console.log('coding sucks')
 					docRef
 			.add({
-				UniqueId:localStorage.getItem("unique-id"),
+				UniqueId:parseInt(localStorage.getItem("unique-id")),
 				RecipeTitle: vTitle.value,
 				RecipeIngredients: vIngred.value,
 				RecipePreparation: vPrepare.value,
 			})
 		}
 //	database.collection("Recipe")
-	docRef
-	.get()
-		.then((querySnapshot) => 
-		{
-			querySnapshot.forEach((doc) =>
-			{
-				dbDoc = doc.data().UniqueId
-
-				arr.push(doc.data().UniqueId)
-				arr.sort(function(a, b){return a-b})
-						console.log(arr)
-			})
-		})		
 }	
 				/*.doc(localStorage.getItem('documentId'))
 					.update({
