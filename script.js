@@ -1,5 +1,7 @@
-
-//in this project we are using firebase as database with js
+//document.getElementById('container').style.visibility='hidden'
+let arr = []
+let dbDoc;
+let localDoc;
 let firebaseConfig = {
   apiKey: "AIzaSyB2dc7G54nZg1H-tKUbxRtWmADEQxRJv10",
   authDomain: "simple-login-page-736b4.firebaseapp.com",
@@ -13,80 +15,70 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 let database = firebase.firestore()
 
-let arr = []
-let counter = 99
-let existing;
-let data;
-function makeRecipe() {
-	counter++;
-	localStorage.setItem("counter" , counter)
-	document.getElementById('container').style.display='none'
-	let vTitle = document.getElementById('title-id')
-	let vIngred = document.getElementById('ingred-id')
-	let vPrepare = document.getElementById('how-to-make')
-	
-database.collection("Recipe")
-.add({
-	//UniqueId:localStorage.getItem("counter"),
-	RecipeTitle:vTitle.value,
-	RecipeIngredients:vIngred.value,
-	RecipePreparation:vPrepare.value,
-})
-.then(function(docRef) 
-		{
-			docId = docRef.id
-			localStorage.setItem("firebaseDoc" , docId)
-		})
-		
-let titleAppend = document.createElement("h2")
-let ingredAppend = document.createElement("h4")
-let prepareAppend = document.createElement("div")
-titleAppend.innerText = vTitle.value
-ingredAppend.innerText = vIngred.value
-prepareAppend.innerText = vPrepare.value
+const docRef = database.collection("Recipe")
 
-//document.getElementById('recipe-container').style.display='inline'	
-document.getElementById('recipe-container').appendChild(titleAppend)
-document.getElementById('recipe-container').appendChild(ingredAppend)
-document.getElementById('recipe-container').appendChild(prepareAppend)
+docRef.orderBy("RecipeTitle").limit(3)
+function newRecipe()
+{
+	document.getElementById('container').style.visibility='visible'
 }
 
-//getting the stored data
-let viewBtn = document.getElementById('view-btn')
-viewBtn.addEventListener('click', () => {
-document.getElementById('container').style.display='none'
-
-database.collection("Recipe")
-.get()
-	.then((querySnapshot) => 
+function makeRecipe()
+{
+	let vTitle = document.getElementById('title-id')
+	let vIngred = document.getElementById('ingred-id')
+	let vPrepare = document.getElementById('prepare-id')
+	
+	if(localStorage.getItem("unique-id")===null)
 	{
-		querySnapshot.forEach((doc) =>
+		addData()
+	}
+		else if(localStorage.getItem("unique-id").length > 0)
 		{
-				 if(doc.get('UniqueId') == null)
-				 {
-					 database.collection("Recipe")
-					 .doc(localStorage.getItem("firebaseDoc"))
-					// .doc("gIrVpQWsTPsmqJuF8zDO")
-					 .update
-					 ({
-						 UniqueId: 100
-					 })
-				//	 arr.push(doc.data().UniqueId)
-		 // console.log(doc.id, '=>', doc.data().RecipeTitle);
-				}
-				else if(doc.get('UniqueId') != null)
-				{
-					arr.push(doc.data().UniqueId)
-					arr.sort()
-					 database.collection("Recipe")
-					 .doc(localStorage.getItem("firebaseDoc"))
-					 .update
-					 ({
-						 UniqueId: arr[arr.length - 1] + 1
-					 })
-				}
-				
+			console.log('coding sucks')
+					docRef
+			.add({
+				UniqueId:localStorage.getItem("unique-id"),
+				RecipeTitle: vTitle.value,
+				RecipeIngredients: vIngred.value,
+				RecipePreparation: vPrepare.value,
+			})
+		}
+//	database.collection("Recipe")
+	docRef
+	.get()
+		.then((querySnapshot) => 
+		{
+			querySnapshot.forEach((doc) =>
+			{
+				dbDoc = doc.data().UniqueId
+
+				arr.push(doc.data().UniqueId)
+				arr.sort(function(a, b){return a-b})
+						console.log(arr)
+			})
+		})		
+}	
+				/*.doc(localStorage.getItem('documentId'))
+					.update({
+						UniqueId: arr[arr.length - 1] + 1
+					})*/
+	function addData()
+	{
+	let vTitle = document.getElementById('title-id')
+	let vIngred = document.getElementById('ingred-id')
+	let vPrepare = document.getElementById('prepare-id')
+	
+	localStorage.setItem("unique-id", arr[arr.length - 1] + 1)
+		console.log('function is working')
+		//database.collection("Recipe")
+		docRef
+		.add({
+			UniqueId: arr[arr.length - 1] + 1,
+			RecipeTitle: vTitle.value,
+			RecipeIngredients: vIngred.value,
+			RecipePreparation: vPrepare.value,
 		})
-	})
-	console.log(arr)
-})
+		console.log(arr)
+	}
+		
