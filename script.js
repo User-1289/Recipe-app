@@ -1,7 +1,6 @@
-//document.getElementById('container').style.visibility='hidden'
+//
 let arr = []
-let dbDoc;
-let localDoc;
+//configuring firebase
 let firebaseConfig = {
   apiKey: "AIzaSyB2dc7G54nZg1H-tKUbxRtWmADEQxRJv10",
   authDomain: "simple-login-page-736b4.firebaseapp.com",
@@ -30,10 +29,9 @@ const docRef = database.collection("Recipe")
 						//console.log(arr)
 			})
 		})		
-//docRef.orderBy("RecipeTitle").limit(3)
 function newRecipe()
 {
-	document.getElementById('container').style.visibility='visible'
+	document.getElementById('container').style.display='inline'
 }
 
 function makeRecipe()
@@ -42,34 +40,29 @@ function makeRecipe()
 	let vIngred = document.getElementById('ingred-id')
 	let vPrepare = document.getElementById('prepare-id')
 	
-	if(localStorage.getItem("unique-id")===null)
+	if(localStorage.getItem("Unique-Id")===null)
 	{
 		addData()
 	}
-		else if(localStorage.getItem("unique-id").length > 0)
+		else if(localStorage.getItem("Unique-Id").length > 0)
 		{
 			console.log('coding sucks')
 					docRef
 			.add({
-				UniqueId:parseInt(localStorage.getItem("unique-id")),
+				UniqueId:parseInt(localStorage.getItem("Unique-Id")),
 				RecipeTitle: vTitle.value,
 				RecipeIngredients: vIngred.value,
 				RecipePreparation: vPrepare.value,
 			})
 		}
-//	database.collection("Recipe")
 }	
-				/*.doc(localStorage.getItem('documentId'))
-					.update({
-						UniqueId: arr[arr.length - 1] + 1
-					})*/
 	function addData()
 	{
 	let vTitle = document.getElementById('title-id')
 	let vIngred = document.getElementById('ingred-id')
 	let vPrepare = document.getElementById('prepare-id')
 	
-	localStorage.setItem("unique-id", arr[arr.length - 1] + 1)
+	localStorage.setItem("Unique-Id", arr[arr.length - 1] + 1)
 		console.log('function is working')
 		//database.collection("Recipe")
 		docRef
@@ -81,4 +74,46 @@ function makeRecipe()
 		})
 		console.log(arr)
 	}
-		
+let viewBtn = document.getElementById('view-btn')
+viewBtn.onclick = function()
+{
+	document.getElementById('container').style.display='none'
+	document.getElementById('btn-ids').style.display='none'
+	document.getElementById('back-btn').style.display='inline'
+	docRef
+	.get()
+	.then((querySnapshot) =>
+	{
+		querySnapshot.forEach((doc) =>
+		{
+			if(localStorage.getItem("Unique-Id") == doc.data().UniqueId)
+			{
+				let jContainer = document.createElement("div")
+				let jTitle = document.createElement("h1")
+				let jIngred = document.createElement("h3")
+				let jPrepare = document.createElement("span")
+				
+				jContainer.classList.add("styleing")
+				jTitle.innerHTML = doc.data().RecipeTitle
+				jIngred.innerHTML = doc.data().RecipeIngredients
+				jPrepare.innerHTML = doc.data().RecipePreparation
+				
+				jContainer.append(jTitle)
+				jContainer.append(jIngred)
+				jContainer.append(jPrepare)
+				
+				document.getElementById('output-container').append(jContainer)
+			}
+				else
+				{
+					alert("You have not added any recipes yet")
+				}
+		})
+	})
+}
+function goBack()
+{
+	document.getElementById('output-container').style.display='none'
+	document.getElementById('container').style.display='inline'
+	document.getElementById('btn-ids').style.display='inline'
+}
