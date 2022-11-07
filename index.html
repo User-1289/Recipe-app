@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recipe app</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<table id="btn-ids">
+<tr> <td align="left"><button class="btn"id="add-recippe"onclick="newRecipe()">Add a recipe</button> </td> </tr><br>
+<!--tr><td align="left"><button class="btn" id="edit-btn" onclick="ret()">See or edit the recipe</button> </td> </tr><br-->
+<tr><td align="left"><button class="btn"id="view-btn"> View your recipe</button></td></tr>
+</table>
+
+
+<div id="container">
+<form align="center" onclick="event.preventDefault()">
+<u><h3 id="title-text">Name of the food</h3></u>
+<textarea id="title-id"></textarea></td></tr>
+<u><div id="ingred-text">Ingredients</div></u></td></tr>
+<textarea id="ingred-id"></textarea> </td></tr>
+<u><div id="prepare-text">Preparation</div></u></td></tr>
+<textarea id="prepare-id"></textarea> </td></td><br>
+<button onclick="makeRecipe()"id="submit-id">Make the recipe</button></td></tr>
+</div>
+
+<table id="main-container">
+<tr><td align="center"><div id="recipe-container"></td></tr>
+</table>
+</div>
+
+<center>
+<div id="output-container">
+<button id="back-btn" onclick="goBack()">Go back to home screen</button>
+</div>
+</center>
+<script defer src="script.js">
+</script>
+</body>
+</html>
