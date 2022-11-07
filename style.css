@@ -41,3 +41,15 @@
 	width:150px;
 	height:40px;
 }
+.styleing{
+	border:1px solid black;
+}
+#back-btn{
+	display:none;
+	width:120px;
+	height:35px;
+	font-size:15px;
+}
+#container{
+	display:none;
+}
