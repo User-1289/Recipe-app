@@ -9,31 +9,30 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<table align="left">
+<table id="btn-ids">
 <tr> <td align="left"><button class="btn"id="add-recippe"onclick="newRecipe()">Add a recipe</button> </td> </tr><br>
 <tr><td align="left"><button class="btn" id="edit-btn" onclick="ret()">See or edit the recipe</button> </td> </tr><br>
 <tr><td align="left"><button class="btn"id="view-btn"> View your recipe</button></td></tr>
-</table><br><br>
-
-  <div id="big-container">
-<div id="container">
-<table align="center">
-<tr><td align="center"><u><h1 id="title">Name of the food</h1></u></td></tr>
-<tr><td align="center"><textarea id="title-id"></textarea></td></tr>
-<tr><td align="center"><u><div id="ingred">Ingredients</div></u></td></tr>
-<tr><td align="center"><textarea id="ingred-id"></textarea> </td></tr>
-<tr><td align="center"><u><div id="prepare-id">Preparation</div></u></td></tr>
-<tr><td align="center"><textarea id="how-to-make"></textarea> </td></td>
-<tr><td align="center"><button onclick="makeRecipe()"id="submitt">Make the recipe</button></td></tr>
 </table>
+
+<div id="container">
+<form align="center" onclick="event.preventDefault()">
+<u><h3 id="title-text">Name of the food</h3>
+<textarea id="title-id"></textarea></td></tr>
+<u><div id="ingred-text">Ingredients</div></u></td></tr>
+<textarea id="ingred-id"></textarea> </td></tr>
+<u><div id="prepare-text">Preparation</div></u></td></tr>
+<textarea id="prepare-id"></textarea> </td></td><br>
+<button onclick="makeRecipe()"id="submit-id">Make the recipe</button></td></tr>
 </div>
-  </div>
-  
-<div id="recipe-container">
+
+<table id="main-container">
+<tr><td align="center"><div id="recipe-container"></td></tr>
+</table>
 </div>
 <table id="main-container" border=1></table>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-<script defer src="script.js">
+<script defer src="script2.js">
 </script>
 </body>
 </html>
