@@ -1,4 +1,3 @@
-//document.getElementById('container').style.visibility='hidden'
 let arr = []
 let dbDoc;
 let localDoc;
